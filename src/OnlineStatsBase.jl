@@ -12,6 +12,8 @@ export
     # Stats
     Counter, CountMap, CovMatrix, Extrema, FTSeries, Group, GroupBy, Mean, Moments, Series, Sum, Variance
 
+const TwoThings{T,S} = Union{Tuple{T,S}, Pair{T,S}, NamedTuple{names, Tuple{T,S}}} where names
+
 #-----------------------------------------------------------------------# OnlineStat
 abstract type OnlineStat{T} end
 
@@ -156,8 +158,6 @@ bessel(o) = nobs(o) / (nobs(o) - 1)
 Statistics.std(o::OnlineStat; kw...) = sqrt.(var(o; kw...))
 
 input(o::OnlineStat{T}) where {T} = T
-
-const TwoThings{T,S} = Union{Tuple{T,S}, Pair{T,S}, NamedTuple{names, Tuple{T,S}}} where names
 
 #-----------------------------------------------------------------------# Compat
 @static if VERSION < v"1.1.0"
