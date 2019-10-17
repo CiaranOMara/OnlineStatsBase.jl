@@ -105,7 +105,6 @@ end
 fit!(o::OnlineStat{T}, yi::T) where {T} = (_fit!(o, yi); return o)
 
 function fit!(o::OnlineStat{I}, y::T) where {I, T}
-    Base.isiterable(T) || error("Cannot iterate through type ",T)
 
     T == eltype(T) && error("Entered recursive loop. The input type for $(name(o,false,false)) is $I. Found $(eltype(y)) in iterable type $T.")
 
